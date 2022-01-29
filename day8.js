@@ -37,29 +37,52 @@ function part_one(data) {
   console.log(`----- count: ${JSON.stringify(count, null, 4)}`)
 }
 
-part_one(data)
+// part_one(data)
 // ----- count: 255
 
 
-// let poss = {
-//   0: [],
-//   1: [],
-//   2: [],
-//   3: [],
-//   4: [],
-//   5: [],
-//   6: [],
-//   7: [],
-//   8: [],
-//   9: [],
-// }
 
-// digitTries.forEach(wires => {
-//   if (wires.length === 2) {
-//     poss[1].push(...wires)
-//   } else if (wires.length === 3) {
-//     poss[7].push(...wires)
-//   } else if (wires.length === 4) {
-//     poss[4].push(...wires)
-//   }
-// })
+
+
+
+
+/*
+fdceba bafdgc abeg afbdgec gbeacd abced bgc fcdge bg bedgc
+
+
+bg
+bgc
+abeg
+abced
+fcdge
+bedgc
+fdceba
+bafdgc
+gbeacd
+afbdgec
+*/
+function part_two(data) {
+  data.slice(0, 1).forEach(line => {
+    const [digitTries, digitDisplays] = line.split('|').map(x => x.trim().split(' '))
+
+    // this sort is for my brain to be able to handle thinking about
+    // this when i see the console log
+    let nxt = digitTries.map(x => {
+      return x.split('').sort().join('')
+    }).sort((a, b) => a.length - b.length)
+    console.log(`----- nxt: ${JSON.stringify(nxt, null, 4)}`)
+
+    digitTries.forEach(wires => {
+      if (wires.length === 2) {
+        poss[1].push(...wires)
+      } else if (wires.length === 3) {
+        poss[7].push(...wires)
+      } else if (wires.length === 4) {
+        poss[4].push(...wires)
+      }
+    })
+    // console.log(`----- poss: ${JSON.stringify(poss, null, 4)}`)
+  })
+}
+
+part_two(data)
